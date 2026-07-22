@@ -18,7 +18,8 @@ addStudent("fariba", 16, "physics", 12, true);
 addStudent("asma", 24, "math", 15, true);
 addStudent("farokh", 32, "computer", 13.5, true);
 
-const showItem = () => students.forEach((item) => console.log(item));
+const showItem = () =>
+  students.forEach(({ name, ...item }) => console.log(item));
 showItem();
 dash();
 const increasScore = students.map((item) => {
@@ -32,30 +33,30 @@ console.log(increasScore);
 
 dash();
 
-const hihgScor = students.filter((item) => item.score >= 17);
+const hihgScor = students.filter(({ score }) => score >= 17);
 console.log(hihgScor);
 
 dash();
 
-const findStudent = students.find((item) => item.name === "farokh");
+const findStudent = students.find(({ name }) => name === "farokh");
 
 console.log(findStudent);
 
 dash();
 
-const checkScore = students.some((item) => item.score === 20);
+const checkScore = students.some(({ score }) => score === 20);
 
 console.log(checkScore);
 
 dash();
 
-const activity = students.every((item) => item.active);
+const activity = students.every(({ active }) => active);
 
 console.log(activity);
 
 dash();
 
-const sumScore = students.reduce((total, scors) => total + scors.score, 0);
+const sumScore = students.reduce((total, { score }) => total + score ,0);
 
 console.log(sumScore);
 
@@ -67,11 +68,11 @@ console.log(averageScor);
 
 dash();
 
-const numbersOfmajor = students.reduce((total, num) => {
-  if (total[num.major]) {
-    total[num.major]++;
+const numbersOfmajor = students.reduce((total, { major }) => {
+  if (total[major]) {
+    total[major]++;
   } else {
-    total[num.major] = 1;
+    total[major] = 1;
   }
   return total;
 }, {});
@@ -86,14 +87,14 @@ const bestStudent = students.reduce((bestStu, stu) => {
   } else {
     return stu;
   }
-}, {});
+});
 
 console.log(bestStudent);
 
 dash();
 
 const suggestedStudent = students.filter(
-  (item) => item.score >= 17 && item.active,
+  ({ score, active }) => score >= 17 && active,
 );
 
 console.log(suggestedStudent);
